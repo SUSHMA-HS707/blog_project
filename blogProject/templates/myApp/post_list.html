@@ -1,0 +1,21 @@
+<html>
+  {%extends 'myApp/parents.html'%}
+  {%block title_block%}
+    <h2>Sushma's Blog</h2>
+  {%endblock%}
+  <body>
+    {%block content_block%}
+    <h1 style="color:#b33d54">Famous women Politicians</h1><br>
+    {%if tag%}
+     <h1>Post tagged with {{tag.name}}</h1>
+    {%endif%}
+    {%for post in post_list%}
+    <a href="{{post.get_absolute_url}}"><b><h2>{{post.title}}</h2></b></a>
+    <i><b>Published on {{post.publish}} by {{post.author|title}}</b></i>
+    <p>Tags:{{post.tags.all|join:','}}</p>
+    {{post.body|truncatewords:40|linebreaks}}
+    {%endfor%}
+    {%include 'myApp/pagination.html' with page=post_list%}
+    {%endblock%}
+  </body>
+</html>
